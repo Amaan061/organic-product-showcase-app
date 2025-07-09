@@ -14,6 +14,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [splitKey, setSplitKey] = useState(Date.now());
   const PRODUCTS_PER_PAGE = 12;
 
   const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
@@ -38,6 +39,10 @@ export default function HomePage() {
 
   useEffect(() => {
     fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    setSplitKey(Date.now()); // update key on mount
   }, []);
 
   if (loading) {
@@ -73,6 +78,7 @@ export default function HomePage() {
                 <Leaf className="h-8 w-8 text-primary" />
               </div>
               <SplitText
+                key={splitKey}
                 text="Organic Store"
                 className="text-4xl md:text-5xl font-bold text-foreground"
                 delay={100}
