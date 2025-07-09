@@ -2,9 +2,12 @@ import React, { useRef, useEffect, useState } from "react";
 import vegatablesImg from './images/vegatables.jpg';
 import fruitsImg from './images/fruits.jpg';
 
+
 const HeroSection: React.FC = () => {
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [bgIndex, setBgIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
   const bgImages = [
     vegatablesImg,
     fruitsImg,
@@ -26,13 +29,26 @@ const HeroSection: React.FC = () => {
     }
   }, []);
 
-  // Background image slider
+  // Intersection Observer to detect visibility
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Background image slider (only runs when visible)
+  useEffect(() => {
+    if (!isVisible) return;
     const interval = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % bgImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [bgImages.length]);
+  }, [bgImages.length, isVisible]);
 
   const handleShopNow = () => {
     const productsSection = document.getElementById("products-section");
@@ -42,7 +58,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center py-20 px-4 overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-[60vh] flex flex-col items-center justify-center text-center py-20 px-4 overflow-hidden">
       {/* Background images slider */}
       <div className="absolute inset-0 w-full h-full">
         {bgImages.map((img, idx) => (
