@@ -7,7 +7,7 @@ import ErrorMessage from '@/components/ErrorMessage';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Package, Star } from 'lucide-react';
+import { ArrowLeft, Package, Star, ShoppingCart, Heart, Share2 } from 'lucide-react';
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -33,6 +33,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     fetchProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (loading) {
@@ -86,11 +87,22 @@ export default function ProductPage() {
                     target.src = `https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=600&fit=crop&crop=center`;
                   }}
                 />
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
                   <Badge className="bg-primary/90 text-primary-foreground shadow-lg">
                     <Star className="h-3 w-3 mr-1" />
                     Organic
                   </Badge>
+                  <div className="flex gap-2 mt-2">
+                    <button className="rounded-full p-2 bg-white/80 hover:bg-primary/10 border border-border/50 shadow transition-colors" title="Add to Cart">
+                      <ShoppingCart className="h-5 w-5 text-primary" />
+                    </button>
+                    <button className="rounded-full p-2 bg-white/80 hover:bg-primary/10 border border-border/50 shadow transition-colors" title="Add to Wishlist">
+                      <Heart className="h-5 w-5 text-pink-500" />
+                    </button>
+                    <button className="rounded-full p-2 bg-white/80 hover:bg-primary/10 border border-border/50 shadow transition-colors" title="Share">
+                      <Share2 className="h-5 w-5 text-accent" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </CardContent>
