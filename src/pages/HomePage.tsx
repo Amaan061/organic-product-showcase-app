@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import SplitText from '@/components/SplitText';
 import { productsAPI, Product } from '@/services/api';
 import ProductGrid from '@/components/ProductGrid';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -57,9 +58,19 @@ export default function HomePage() {
             <div className="p-3 bg-primary/10 rounded-full">
               <Leaf className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-              Organic Store
-            </h1>
+            <SplitText
+              text="Organic Store"
+              className="text-4xl md:text-5xl font-bold text-foreground"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
             <div className="p-3 bg-accent/10 rounded-full">
               <Sparkles className="h-8 w-8 text-accent" />
             </div>
