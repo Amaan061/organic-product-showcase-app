@@ -7,6 +7,7 @@ import ErrorMessage from '@/components/ErrorMessage';
 import { Leaf, Sparkles } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import HeroSection from '@/components/HeroSection';
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -55,7 +56,8 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-subtle flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-8">
+        <HeroSection />
+        <div id="products-section" className="container mx-auto px-4 py-8">
           {/* Header */}
           <div className="text-center mb-12 space-y-4">
             <div className="flex items-center justify-center gap-3 mb-4">

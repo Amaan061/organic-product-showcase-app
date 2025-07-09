@@ -12,10 +12,10 @@ export default function Navbar() {
           Organic Store
         </Link>
         <div className="flex gap-6 items-center">
-          <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">Home</Link>
-          <Link to="#products" className="text-foreground hover:text-primary transition-colors font-medium">Products</Link>
-          <Link to="#about" className="text-foreground hover:text-primary transition-colors font-medium">About</Link>
-          <Link to="#contact" className="text-foreground hover:text-primary transition-colors font-medium">Contact</Link>
+          <Link to="/" className="text-foreground hover:text-primary transition-colors font-semibold text-lg md:text-xl">Home</Link>
+          <Link to="#products" className="text-foreground hover:text-primary transition-colors font-semibold text-lg md:text-xl">Products</Link>
+          <Link to="#about" className="text-foreground hover:text-primary transition-colors font-semibold text-lg md:text-xl">About</Link>
+          <Link to="#contact" className="text-foreground hover:text-primary transition-colors font-semibold text-lg md:text-xl">Contact</Link>
         </div>
       </div>
     </nav>
