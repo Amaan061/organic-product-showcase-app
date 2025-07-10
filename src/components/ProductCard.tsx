@@ -6,9 +6,9 @@ interface ProductCardProps {
   product: Product;
 }
 
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 
-export default function ProductCard({ product }: ProductCardProps) {
+const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
   const [added, setAdded] = useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -28,6 +28,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
+              loading="lazy"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = `https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=400&fit=crop&crop=center`;
@@ -65,4 +66,6 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Card>
     </Link>
   );
-}
+});
+
+export default ProductCard;
