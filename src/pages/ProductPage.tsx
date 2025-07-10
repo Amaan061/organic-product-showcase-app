@@ -7,7 +7,65 @@ import ErrorMessage from '@/components/ErrorMessage';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+
+import React, { useState as useStateReact } from 'react';
 import { ArrowLeft, Package, Star, ShoppingCart, Heart, Share2 } from 'lucide-react';
+
+function ProductActions() {
+  const [cart, setCart] = useStateReact(false);
+  const [wish, setWish] = useStateReact(false);
+  const [shared, setShared] = useStateReact(false);
+
+  return (
+    <div className="flex gap-2 mt-2">
+      <button
+        className={`rounded-full p-2 bg-white/80 border border-border/50 shadow transition-colors flex items-center justify-center ${cart ? 'bg-green-100 border-green-400' : 'hover:bg-primary/10'}`}
+        title="Add to Cart"
+        onClick={() => {
+          setCart(true);
+          setTimeout(() => setCart(false), 1200);
+        }}
+        type="button"
+      >
+        {cart ? (
+          <svg className="h-5 w-5 text-green-500 animate-bounce" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+        ) : (
+          <ShoppingCart className="h-5 w-5 text-primary" />
+        )}
+      </button>
+      <button
+        className={`rounded-full p-2 bg-white/80 border border-border/50 shadow transition-colors flex items-center justify-center ${wish ? 'bg-pink-100 border-pink-400' : 'hover:bg-primary/10'}`}
+        title="Add to Wishlist"
+        onClick={() => {
+          setWish(true);
+          setTimeout(() => setWish(false), 1200);
+        }}
+        type="button"
+      >
+        {wish ? (
+          <svg className="h-5 w-5 text-pink-500 animate-bounce" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+        ) : (
+          <Heart className="h-5 w-5 text-pink-500" />
+        )}
+      </button>
+      <button
+        className={`rounded-full p-2 bg-white/80 border border-border/50 shadow transition-colors flex items-center justify-center ${shared ? 'bg-blue-100 border-blue-400' : 'hover:bg-primary/10'}`}
+        title="Share"
+        onClick={() => {
+          setShared(true);
+          setTimeout(() => setShared(false), 1200);
+        }}
+        type="button"
+      >
+        {shared ? (
+          <svg className="h-5 w-5 text-blue-500 animate-bounce" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+        ) : (
+          <Share2 className="h-5 w-5 text-accent" />
+        )}
+      </button>
+    </div>
+  );
+}
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -77,11 +135,11 @@ export default function ProductPage() {
           {/* Product Image */}
           <Card className="overflow-hidden shadow-card">
             <CardContent className="p-0">
-              <div className="aspect-square relative">
+              <div className="relative flex items-center justify-center" style={{ minHeight: '320px' }}>
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full max-w-[400px] h-auto max-h-[340px] object-contain rounded-xl border border-border/30 shadow"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = `https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=600&fit=crop&crop=center`;
@@ -92,21 +150,12 @@ export default function ProductPage() {
                     <Star className="h-3 w-3 mr-1" />
                     Organic
                   </Badge>
-                  <div className="flex gap-2 mt-2">
-                    <button className="rounded-full p-2 bg-white/80 hover:bg-primary/10 border border-border/50 shadow transition-colors" title="Add to Cart">
-                      <ShoppingCart className="h-5 w-5 text-primary" />
-                    </button>
-                    <button className="rounded-full p-2 bg-white/80 hover:bg-primary/10 border border-border/50 shadow transition-colors" title="Add to Wishlist">
-                      <Heart className="h-5 w-5 text-pink-500" />
-                    </button>
-                    <button className="rounded-full p-2 bg-white/80 hover:bg-primary/10 border border-border/50 shadow transition-colors" title="Share">
-                      <Share2 className="h-5 w-5 text-accent" />
-                    </button>
-                  </div>
+                  <ProductActions />
                 </div>
               </div>
             </CardContent>
           </Card>
+
 
           {/* Product Info */}
           <div className="space-y-6">
