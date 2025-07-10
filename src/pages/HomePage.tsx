@@ -5,9 +5,11 @@ import ProductGrid from '@/components/ProductGrid';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ErrorMessage from '@/components/ErrorMessage';
 import { Leaf, Sparkles } from 'lucide-react';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
+import ChatbotWidget from '@/components/ChatbotWidget';
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -156,6 +158,7 @@ export default function HomePage() {
         </div>
       </main>
       <Footer />
+      <ChatbotWidget />
     </div>
   );
 }
