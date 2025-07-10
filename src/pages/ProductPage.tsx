@@ -133,28 +133,26 @@ export default function ProductPage() {
         {/* Product Details */}
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {/* Product Image */}
-          <Card className="overflow-hidden shadow-card">
-            <CardContent className="p-0">
-              <div className="relative flex items-center justify-center" style={{ minHeight: '320px' }}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full max-w-[400px] h-auto max-h-[340px] object-contain rounded-xl border border-border/30 shadow"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = `https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=600&fit=crop&crop=center`;
-                  }}
-                />
-                <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
-                  <Badge className="bg-primary/90 text-primary-foreground shadow-lg">
-                    <Star className="h-3 w-3 mr-1" />
-                    Organic
-                  </Badge>
-                  <ProductActions />
-                </div>
+          <div className="flex items-center justify-center">
+            <div className="relative">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full max-w-[400px] h-auto max-h-[340px] object-contain rounded-xl border border-border/30 shadow"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = `https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=600&fit=crop&crop=center`;
+                }}
+              />
+              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
+                <Badge className="bg-primary/90 text-primary-foreground shadow-lg">
+                  <Star className="h-3 w-3 mr-1" />
+                  Organic
+                </Badge>
+                <ProductActions />
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
 
           {/* Product Info */}
